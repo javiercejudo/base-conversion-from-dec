@@ -19,7 +19,7 @@ describe('base conversion', function() {
       .should.be.exactly('802531310452364303450750087576673257456135727727');
   });
 
-  it('Big to base 62', function() {
+  it('decimal to base 62', function() {
     var decTo62 = fn(62);
 
     decTo62('60').should.be.exactly('y');
@@ -45,7 +45,7 @@ describe('base conversion', function() {
       .should.be.exactly('172#10402034');
   });
 
-  it.skip('non-integer Big to base 9', function() {
+  it.skip('non-integer decimal to base 9', function() {
     fn(9, '10.10').should.be.exactly('11.08');
   });
 });

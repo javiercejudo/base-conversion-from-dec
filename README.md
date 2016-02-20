@@ -4,7 +4,9 @@
 [![Coverage Status](https://coveralls.io/repos/javiercejudo/base-conversion-from-dec/badge.svg?branch=master)](https://coveralls.io/r/javiercejudo/base-conversion-from-dec?branch=master)
 [![Code Climate](https://codeclimate.com/github/javiercejudo/base-conversion-from-dec/badges/gpa.svg)](https://codeclimate.com/github/javiercejudo/base-conversion-from-dec)
 
-Auto-curried converter to any base with arbitrary precision support and customisable symbols
+Auto-curried converter to any base with arbitrary precision support and customisable symbols.
+
+For any to any base conversions, see [base-conversion](https://github.com/javiercejudo/base-conversion).
 
 ## Install
 
