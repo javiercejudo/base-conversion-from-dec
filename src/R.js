@@ -15,6 +15,5 @@ module.exports = Object.freeze({
   nth: require('ramda/src/nth'),
   pipe: require('ramda/src/pipe'),
   reverse: require('ramda/src/reverse'),
-  split: require('ramda/src/split'),
   unfold: require('ramda/src/unfold')
 });

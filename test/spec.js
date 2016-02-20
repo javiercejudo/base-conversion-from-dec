@@ -34,11 +34,15 @@ describe('base conversion', function() {
 
   it('should expose the raw converter', function() {
     var d = toBigFactory(Big);
+    var weirdDecTo9 = fn.raw(d, '01234#6789', 9);
 
     Big.Impl.E_POS = 50;
 
-    fn.raw(d, '01234#6789', 9, '#678364#6#34#634#634#63467#7364#63#34#3464#74#')
+    weirdDecTo9('#678364#6#34#634#634#63467#7364#63#34#3464#74#')
       .should.be.exactly('802#313104#23643034#07#0087#766732#74#613#727727');
+
+    weirdDecTo9('#678364#6#3')
+      .should.be.exactly('172#10402034');
   });
 
   it.skip('non-integer Big to base 9', function() {

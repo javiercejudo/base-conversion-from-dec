@@ -9,7 +9,6 @@ var R = require('./R');
 
 var defaultB = toBigFactory(require('./Big'));
 var defaultSymbols = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-var splitWithoutSep = R.split('');
 var joinWithoutSep = R.join('');
 var toString = R.invoker(0, 'toString');
 
@@ -26,7 +25,6 @@ var preprocess = R.memoize(function(symbols) {
     R.identity :
     R.pipe(
       toString,
-      splitWithoutSep,
       R.map(indexOfSymbol(symbols)),
       joinWithoutSep
     );
