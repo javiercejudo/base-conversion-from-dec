@@ -1,6 +1,6 @@
 {
   "name": "base-conversion-from-dec",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Auto-curried converter to any base with arbitrary precision support and customisable symbols",
   "main": "src/index.js",
   "scripts": {
