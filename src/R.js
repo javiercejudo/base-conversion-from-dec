@@ -4,6 +4,7 @@
 
 module.exports = Object.freeze({
   __: require('ramda/src/__'),
+  adjust: require('ramda/src/adjust'),
   curryN: require('ramda/src/curryN'),
   identical: require('ramda/src/identical'),
   identity: require('ramda/src/identity'),
@@ -15,5 +16,6 @@ module.exports = Object.freeze({
   nth: require('ramda/src/nth'),
   pipe: require('ramda/src/pipe'),
   reverse: require('ramda/src/reverse'),
+  split: require('ramda/src/split'),
   unfold: require('ramda/src/unfold')
 });

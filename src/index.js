@@ -6,48 +6,36 @@ var posNotation = require('positional-notation');
 var toBigFactory = require('to-decimal-arbitrary-precision');
 
 var R = require('./R');
+var U = require('./U');
+var translate = require('./translate');
+// var fracUnfolder = require('./fracUnfolder');
 
-var defaultB = toBigFactory(require('./Big'));
+var defaultBig = toBigFactory(require('./Big'));
 var defaultSymbols = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-var joinWithoutSep = R.join('');
-var toString = R.invoker(0, 'toString');
 
-var indexOfSymbol = R.memoize(function(symbols) {
-  return R.memoize(R.indexOf(R.__, symbols));
-});
-
-var nthSymbol = R.memoize(function(symbols) {
-  return R.memoize(R.nth(R.__, symbols));
-});
-
-var preprocess = R.memoize(function(symbols) {
-  return R.identical(symbols, defaultSymbols) ?
-    R.identity :
-    R.pipe(
-      toString,
-      R.map(indexOfSymbol(symbols)),
-      joinWithoutSep
-    );
-});
-
-var fromDecimalRaw = R.curryN(4, function(b, symbols, base, n) {
+var fromDecimalRaw = R.curryN(4, function(big, symbols, base, n) {
   return R.pipe(
-    preprocess(symbols),
-    R.unfold(posNotation.unfolder(b, base)),
-    R.map(nthSymbol(symbols)),
-    R.reverse,
-    joinWithoutSep
+    U.toString,
+    translate(defaultSymbols, symbols),
+    U.splitByDot,
+    R.adjust(R.unfold(posNotation.unfolder(big, base)), 0),
+    // R.adjust(fracUnfolder(posNotation.unfolder(big, base)), 1),
+    R.adjust(R.reverse, 0),
+    R.map(R.map(U.nthSymbol(symbols))),
+    R.adjust(U.joinWithoutSep, 0),
+    U.joinWithDot
   )(n);
 });
 
 
-var fromDecimal = fromDecimalRaw(defaultB, defaultSymbols);
+var fromDecimal = fromDecimalRaw(defaultBig, defaultSymbols);
 
 fromDecimal.big = fromDecimalRaw(R.__, defaultSymbols);
-fromDecimal.symbols = fromDecimalRaw(defaultB);
+fromDecimal.symbols = fromDecimalRaw(defaultBig);
 fromDecimal.raw = fromDecimalRaw;
 
 fromDecimal.defaultSymbols = defaultSymbols;
-fromDecimal.defaultB = defaultB;
+fromDecimal.defaultBig = defaultBig;
+fromDecimal.__ = R.__;
 
 module.exports = fromDecimal;
